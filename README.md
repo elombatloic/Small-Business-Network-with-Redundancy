@@ -17,6 +17,7 @@ This project implements a highly available network infrastructure for a small bu
 ---
 
 ## Network Topology
+![Project Topology](./network_diagram.png))  
 
 ```
      [ISP 1]          [ISP 2]
