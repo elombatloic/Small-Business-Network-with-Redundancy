@@ -1,0 +1,292 @@
+!DSW1_config
+
+!
+version 16.3.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname DSW1
+!
+!
+no profinet
+enable secret 9 $9$J19FIAftPZf7c3$oF3xre5Dmq1ZbAwpAXWlRNaXtn48h/TUyFSS0KJ1Lo2
+!
+!
+ip dhcp excluded-address 172.16.10.1 172.16.10.9
+ip dhcp excluded-address 172.16.20.1 172.16.20.9
+ip dhcp excluded-address 172.16.40.1 172.16.40.9
+ip dhcp excluded-address 172.16.50.1 172.16.50.9
+!
+ip dhcp pool Employees
+ network 172.16.10.0 255.255.255.0
+ default-router 172.16.10.1
+ domain-name lgemprojectccna.com
+ip dhcp pool Guest_WiFi
+ network 172.16.20.0 255.255.255.0
+ default-router 172.16.20.1
+ domain-name lgemprojectccna.com
+ip dhcp pool VoIP
+ network 172.16.40.0 255.255.255.0
+ default-router 172.16.40.1
+ domain-name lgemprojectccna.com
+ip dhcp pool Management
+ network 172.16.50.0 255.255.255.0
+ default-router 172.16.50.1
+ domain-name lgemprojectccna.com
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+username lgem secret 9 $9$J19FIAftPZf7c3$oF3xre5Dmq1ZbAwpAXWlRNaXtn48h/TUyFSS0KJ1Lo2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name lgemprojectccna.com
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10,20,50 priority 24576
+spanning-tree vlan 30,40 priority 28672
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description RID-DSW1
+ ip address 3.3.3.3 255.255.255.255
+ ip ospf 1 area 0
+!
+interface Port-channel1
+ description EtherChannel to DSW2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/1
+ description Trunk to ASW-Floor1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/2
+ description EtherChannel to DSW2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/3
+ description EtherChannel to DSW2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/0/4
+ description Trunk to ASW-Floor2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/5
+ description Link to Edge-R2
+ no switchport
+ ip address 10.0.1.14 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/6
+ description Link to Edge-R1
+ no switchport
+ ip address 10.0.1.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/7
+ shutdown
+!
+interface GigabitEthernet1/0/8
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ shutdown
+!
+interface GigabitEthernet1/0/15
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ shutdown
+!
+interface GigabitEthernet1/0/17
+ shutdown
+!
+interface GigabitEthernet1/0/18
+ shutdown
+!
+interface GigabitEthernet1/0/19
+ shutdown
+!
+interface GigabitEthernet1/0/20
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ shutdown
+!
+interface GigabitEthernet1/0/22
+ shutdown
+!
+interface GigabitEthernet1/0/23
+ shutdown
+!
+interface GigabitEthernet1/0/24
+ shutdown
+!
+interface GigabitEthernet1/1/1
+ shutdown
+!
+interface GigabitEthernet1/1/2
+ shutdown
+!
+interface GigabitEthernet1/1/3
+ shutdown
+!
+interface GigabitEthernet1/1/4
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ description SVI Vlan 10 Employees
+ mac-address 0003.e4e7.9c01
+ ip address 172.16.10.2 255.255.255.0
+ standby version 2
+ standby 10 ip 172.16.10.1
+ standby 10 priority 110
+ standby 10 preempt
+!
+interface Vlan20
+ description SVI Vlan 20 Guest_WiFi
+ mac-address 0003.e4e7.9c02
+ ip address 172.16.20.2 255.255.255.0
+ standby version 2
+ standby 20 ip 172.16.20.1
+ standby 20 priority 110
+ standby 20 preempt
+!
+interface Vlan30
+ description SVI Vlan 30 Servers
+ mac-address 0003.e4e7.9c03
+ ip address 172.16.30.2 255.255.255.0
+ standby version 2
+ standby 30 ip 172.16.30.1
+!
+interface Vlan40
+ description SVI Vlan 40 VoIP
+ mac-address 0003.e4e7.9c04
+ ip address 172.16.40.2 255.255.255.0
+ standby version 2
+ standby 40 ip 172.16.40.1
+!
+interface Vlan50
+ description SVI Vlan 50 Management
+ mac-address 0003.e4e7.9c05
+ ip address 172.16.50.2 255.255.255.0
+ standby version 2
+ standby 50 ip 172.16.50.1
+ standby 50 priority 110
+ standby 50 preempt
+!
+router ospf 1
+ log-adjacency-changes
+ passive-interface GigabitEthernet1/0/1
+ passive-interface GigabitEthernet1/0/4
+ passive-interface Loopback0
+ passive-interface Vlan10
+ passive-interface Vlan20
+ passive-interface Vlan30
+ passive-interface Vlan40
+ passive-interface Vlan50
+ network 10.0.1.0 0.0.0.3 area 0
+ network 10.0.1.12 0.0.0.3 area 0
+ network 172.16.10.0 0.0.0.255 area 0
+ network 172.16.20.0 0.0.0.255 area 0
+ network 172.16.30.0 0.0.0.255 area 0
+ network 172.16.40.0 0.0.0.255 area 0
+ network 172.16.50.0 0.0.0.255 area 0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet1/0/6 10.0.1.1 
+ip route 0.0.0.0 0.0.0.0 10.0.1.13 10
+!
+ip flow-export version 9
+!
+!
+ip access-list extended GUEST_ISOLATION
+ deny ip 172.16.20.0 0.0.0.255 172.16.10.0 0.0.0.255
+ deny ip 172.16.20.0 0.0.0.255 172.16.30.0 0.0.0.255
+ deny ip 172.16.20.0 0.0.0.255 172.16.40.0 0.0.0.255
+ deny ip 172.16.20.0 0.0.0.255 172.16.50.0 0.0.0.255
+ permit ip any any
+ip access-list extended MGMT-ONLY
+ permit tcp 172.16.50.0 0.0.0.255 any
+!
+!
+!
+!
+!
+line con 0
+ password cisco123
+ logging synchronous
+ login
+!
+line aux 0
+!
+line vty 0 4
+ access-class MGMT-ONLY in
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ access-class MGMT-ONLY in
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+!
+end

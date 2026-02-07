@@ -1,0 +1,177 @@
+!ASW-Floor2_config
+
+Current configuration : 3303 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ASW-Floor2
+!
+enable secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+!
+!
+!
+ip ssh version 2
+ip domain-name lgemprojectccna.com
+!
+username lgem secret 5 $1$mERr$5.a6P4JqbNiMX01usIfka/
+!
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+!
+interface FastEthernet0/1
+ description Employee workstation
+ switchport access vlan 10
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security violation restrict 
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ description Employee workstation
+ switchport access vlan 10
+ switchport mode access
+ switchport voice vlan 40
+ switchport port-security
+ switchport port-security maximum 3
+ switchport port-security violation restrict 
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ description Mail Server
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security violation restrict 
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ description Guest Wifi AP
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 128
+ switchport port-security violation restrict 
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ description File Server
+ switchport access vlan 30
+ switchport mode access
+ switchport port-security
+ switchport port-security violation restrict 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface FastEthernet0/6
+ shutdown
+!
+interface FastEthernet0/7
+ shutdown
+!
+interface FastEthernet0/8
+ shutdown
+!
+interface FastEthernet0/9
+ shutdown
+!
+interface FastEthernet0/10
+ shutdown
+!
+interface FastEthernet0/11
+ shutdown
+!
+interface FastEthernet0/12
+ shutdown
+!
+interface FastEthernet0/13
+ shutdown
+!
+interface FastEthernet0/14
+ shutdown
+!
+interface FastEthernet0/15
+ shutdown
+!
+interface FastEthernet0/16
+ shutdown
+!
+interface FastEthernet0/17
+ shutdown
+!
+interface FastEthernet0/18
+ shutdown
+!
+interface FastEthernet0/19
+ shutdown
+!
+interface FastEthernet0/20
+ shutdown
+!
+interface FastEthernet0/21
+ shutdown
+!
+interface FastEthernet0/22
+ shutdown
+!
+interface FastEthernet0/23
+ shutdown
+!
+interface FastEthernet0/24
+ shutdown
+!
+interface GigabitEthernet0/1
+ description Trunk to DSW2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ description Trunk to DSW1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan50
+ description MGMT
+ ip address 172.16.50.98 255.255.255.0
+!
+ip default-gateway 172.16.50.1
+!
+!
+!
+!
+ip access-list extended MGMT-ONLY
+ permit tcp 172.16.50.0 0.0.0.255 any
+line con 0
+ password cisco123
+ logging synchronous
+ login
+!
+line vty 0 4
+ access-class MGMT-ONLY in
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ access-class MGMT-ONLY in
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+!
+end
+
