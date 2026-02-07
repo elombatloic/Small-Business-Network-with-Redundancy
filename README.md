@@ -940,6 +940,9 @@ show etherchannel port-channel
 
 ! Expected output: Po1 should show (SU) - Layer2 in-use
 ```
+![sh_etherchannel_summary](./screenshots/tests_results/sh_etherchannel_summary.png)
+![sh_etherchannel_port-channel](./screenshots/tests_results/sh_etherchannel_port-channel.png)
+
 
 ### NAT Verification
 ```cisco
@@ -949,6 +952,8 @@ show ip nat statistics
 ! Test from inside: ping 8.8.8.8
 ! Verify translation appears
 ```
+![sh_ip_nat_translations](./screenshots/tests_results/sh_ip_nat_translations.png)
+![sh_ip_nat_statistics](./screenshots/tests_results/sh_ip_nat_statistics.png)
 
 ### Failover Testing
 ```cisco
@@ -956,15 +961,24 @@ show ip nat statistics
 interface vlan 10
   shutdown
 ! Check if DSW2 becomes active
+```
+![testing_hsrp_failover_1](./screenshots/tests_results/testing_hsrp_failover_1.png)
+![testing_hsrp_failover_2](./screenshots/tests_results/testing_hsrp_failover_2.png)
 
+```
 ! Test ISP failover
 ! Shutdown Edge-R1 GigabitEthernet0/0
 ! Verify traffic flows through Edge-R2
+```
+![testing_isp_failover_1](./screenshots/tests_results/testing_isp_failover_1.png)
+![testing_isp_failover_2](./screenshots/tests_results/testing_isp_failover_2.png)
 
+```
 ! Test EtherChannel
 ! Shutdown one link in Port-channel1
 ! Verify traffic continues on remaining link
 ```
+![testing_etherchannel_failover_1](./screenshots/tests_results/testing_etherchannel_failover_1.png)
 
 ---
 
