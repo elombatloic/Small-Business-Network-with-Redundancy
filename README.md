@@ -19,23 +19,6 @@ This project implements a highly available network infrastructure for a small bu
 ## Network Topology
 ![Project Topology](./network_diagram.png))  
 
-```
-     [ISP 1]          [ISP 2]
-        |                |
-        |                |
-     [Edge-R1]-------[Edge-R2]
-        |                |
-        +-------+--------+
-                |
-         [DSW1]=====[DSW2]  (EtherChannel)
-                |        |
-        +-------+--------+--------+
-        |       |        |        |
-    [ASW-Floor1]| [ASW-Floor2]    |
-        |       |        |        |
-     [Users] [Servers] [Users] [WiFi-AP]
-```
-
 ---
 
 ## IP Addressing Scheme
