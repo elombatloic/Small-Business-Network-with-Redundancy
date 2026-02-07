@@ -17,7 +17,7 @@ This project implements a highly available network infrastructure for a small bu
 ---
 
 ## Network Topology
-![Project Topology](./network_diagram.png))  
+![Project Topology](./network_diagram.png)
 
 ---
 
@@ -930,6 +930,8 @@ show standby vlan 10
 ! Expected output: DSW1 should be "Active" for VLANs 10,20 and 50
 !                  DSW2 should be "Active" for VLANs 30, and 40
 ```
+![show_standby_brief](./screenshots/tests_results/show_standby_brief.png)
+
 
 ### EtherChannel Verification
 ```cisco
