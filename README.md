@@ -1,6 +1,4 @@
 # Small Business Network with Redundancy
-## CCNA Portfolio Project #2
-
 ---
 
 ## Project Overview
